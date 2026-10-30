@@ -62,7 +62,7 @@ test("Fetch_Events", async ({ page }) => {
 
 })
 
-test.only("Dropdow", async ({page})=>{
+test("Dropdow", async ({page})=>{
 
     await page.goto("https://eventhub.rahulshettyacademy.com/login")
     const email = page.locator("#email")
@@ -90,4 +90,112 @@ test.only("Dropdow", async ({page})=>{
     }
 
 })
+
+test("child_window", async ({browser})=>{
+
+    const context = await browser.newContext()
+    const page = await context.newPage()
+
+    await page.goto("https://eventhub.rahulshettyacademy.com/login")
+    const email = page.locator("#email")
+    const password = page.locator("#password")
+    const submitButton = page.locator("[type='submit']")
+    const logout = page.locator("#logout-btn")
+    const apiPageLink = page.locator("div[class*='hidden'] a[href*='/api/docs']")
+
+    await email.fill("Venkatesh@gm.co")
+    await password.fill("Pass@123")
+    await submitButton.click()
+    await expect(logout).toBeVisible()
+
+   const [page2] =await Promise.all([
+        context.waitForEvent("page"),
+        apiPageLink.click(),
+    ])
+    const textLoc = page2.locator("h3[id='operations-tag-Auth'] p")
+
+    const page2text = await textLoc.textContent()
+    console.log(page2text)
+
+
+})
+
+
+test.only("Allevnets_bookone", async ({browser})=>{
+
+    const context = await browser.newContext()
+    const page = await context.newPage()
+    await page.goto("https://eventhub.rahulshettyacademy.com/login")
+    const email = page.locator("#email")
+    const password = page.locator("#password")
+    const submitButton = page.locator("[type='submit']")
+    const logout = page.locator("#logout-btn")
+    const Events = page.locator("#nav-events")
+    const listOfEvents = page.locator("a[href*='/events/'] h3")
+
+    await email.fill("Venkatesh@gm.co")
+    await password.fill("Pass@123")
+    await submitButton.click()
+    await expect(logout).toBeVisible()
+    await Events.click()
+    await expect(listOfEvents.last()).toBeVisible()
+    const count = await listOfEvents.count()
+    
+
+    for(let i=0;i<count;i++)
+    {
+       let eventName =await listOfEvents.nth(i).textContent()
+       if (eventName.includes("Monsoon"))
+       {
+           await page.locator("#book-now-btn").nth(i).click()
+           const eventText = await page.locator(".text-gray-900.truncate").textContent()
+           console.log(eventText)
+           break
+       }
+
+    }
+
+    //Booking 
+
+    const increaseButton = page.getByRole("button",{name:'+'})
+    const fullName = page.getByPlaceholder("Your full name")
+    const emailOnForm =  page.getByPlaceholder('you@email.com')
+    const phoneNumber = page.getByRole('textbox', { name: 'Phone Number*' })
+    const confirmButton = page.getByRole('button', { name: 'Confirm Booking' })
+
+    await increaseButton.click()
+    await fullName.fill("Venkatesh")
+    await emailOnForm.fill("venkates@gm.co")
+    await phoneNumber.fill("8787909878")
+
+    //price validation 
+    const perTicketPrice = await page.locator("span[class*='text-2xl']").textContent()
+    const ticketCount = await page.locator("#ticket-count").textContent()
+    const totalCost = await page.locator("span[class='text-indigo-700']").textContent()
+    console.log(perTicketPrice)
+    console.log(ticketCount)
+    console.log(totalCost)
+
+    await confirmButton.click()
+
+    const Bookdetail = page.locator("[class*='text-xl']")
+    const textdet = await Bookdetail.textContent()
+    console.log(textdet)
+    
+
+    const EachTicketPriceint = parseInt(perTicketPrice.replace(/[^0-9.-]/g,""))
+    const tickectCountint = parseInt(ticketCount)
+    const totalcostint = parseInt(totalCost.replace(/[^0-9.-]/g,""))
+
+    console.log(EachTicketPriceint)
+    console.log(tickectCountint)
+    console.log(totalcostint)
+
+    if (totalcostint == EachTicketPriceint*tickectCountint)
+    {
+        console.log("total Match")
+    }
+
+})
+
 
