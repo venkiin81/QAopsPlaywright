@@ -121,7 +121,7 @@ test("child_window", async ({browser})=>{
 })
 
 
-test.only("Allevnets_bookone", async ({browser})=>{
+test("Allevnets_bookone", async ({browser})=>{
 
     const context = await browser.newContext()
     const page = await context.newPage()
@@ -198,4 +198,132 @@ test.only("Allevnets_bookone", async ({browser})=>{
 
 })
 
+
+test('Auto_suggestion', async ({page})=>{
+
+    await page.goto("https://mssit3.lntsufin.com/")
+
+    const searchLoc = page.locator("[name='searchid']")
+    const suggestionsList = page.locator("li[class*='buyesearchlist']")
+    const dropdowOption = page.locator("[id='suggestion-box']")
+
+    await searchLoc.pressSequentially("Safety",{delay:100})
+    const numberOfSuggestion=await suggestionsList.count()
+    await expect(suggestionsList.last()).toBeVisible()
+   // console.log(numberOfSuggestion)
+
+    const suggestions = await suggestionsList.allInnerTexts()
+   // console.log(suggestions)
+    const targetText = "Safety Shoes"
+    for(let i=0;i<numberOfSuggestion;i++)
+    {
+        const suggestion = suggestionsList.nth(i)
+      //  console.log(suggestion)
+        const text = (await suggestion.innerText()).trim();
+        //console.log(text)
+                 if (text === targetText) {
+                            await suggestion.click();
+                           // clicked = true;
+                            break;
+                         }
+ 
+    }
+
+
+})
+
+
+test("Auto_suggestion_2",async ({page})=>{
+
+    await page.goto("https://www.booking.com/index.en-gb.html?label=en-in-booking-mobile-PzCtZSeq_K7p82LvC_GUtQSM652796016639%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-334108349%3Alp9062055%3Ali%3Adem%3Adm&gclid=CjwKCAjwgJHXBhBGEiwAHohJqx60F0tvZb6PHVqKgJCvRLTqjUlWXLy0qjKaPU1Zmyq4BGl19MQpXBoCxMkQAvD_BwE&aid=2311236&ws=&gad_source=1&gad_campaignid=19655505510&gbraid=0AAAAAD_Ls1Jg_K5CXfMNNQ8Z-mbpTms_T")
+
+    const EnterDestination = page.locator("[placeholder='Where are you going?']")
+    const suggestionBox = page.locator("[data-testid='autocomplete-results']")
+    const suggestions = page.locator("[data-testid='autocomplete-results'] li div[class*='b08850ce41']")
+    
+    const popup = page.getByRole('button', { name: 'Dismiss sign in information.' })
+
+    await expect(popup).toBeVisible()
+    await popup.click()
+
+    await EnterDestination.pressSequentially("Thailand",{delay:100})
+    await expect(suggestionBox).toBeVisible()
+    const count=await suggestions.count()
+    console.log("Suggestions count: "+count)
+    await expect(suggestions.last()).toBeVisible()
+
+    for(let i=0; i<count; i++)
+    {
+        const suggestiontext = await suggestions.nth(i).innerText()
+        console.log(suggestiontext)
+    }
+
+})
+
+test.only("Searchforref_Id_Complete_booking", async ({browser})=>{
+
+    const context = await browser.newContext()
+    const page = await context.newPage()
+    await page.goto("https://eventhub.rahulshettyacademy.com/login")
+    const email = page.locator("#email")
+    const password = page.locator("#password")
+    const submitButton = page.locator("[type='submit']")
+    const logout = page.locator("#logout-btn")
+    const Events = page.locator("#nav-events")
+    const listOfEvents = page.locator("a[href*='/events/'] h3")
+
+    await email.fill("Venkatesh@gm.co")
+    await password.fill("Pass@123")
+    await submitButton.click()
+    await expect(logout).toBeVisible()
+    await Events.click()
+    await expect(listOfEvents.last()).toBeVisible()
+    const count = await listOfEvents.count()
+
+    for(let i=0;i<count;i++)
+    {
+       let eventName =await listOfEvents.nth(i).textContent()
+       if (eventName.includes("Monsoon"))
+       {
+           await page.locator("#book-now-btn").nth(i).click()
+           const eventText = await page.locator(".text-gray-900.truncate").textContent()
+           console.log(eventText)
+           break
+       }
+
+    }
+
+    //Booking 
+
+    const increaseButton = page.getByRole("button",{name:'+'})
+    const fullName = page.getByPlaceholder("Your full name")
+    const emailOnForm =  page.getByPlaceholder('you@email.com')
+    const phoneNumber = page.getByRole('textbox', { name: 'Phone Number*' })
+    const confirmButton = page.getByRole('button', { name: 'Confirm Booking' })
+    const referNumber = page.locator("span[class*='booking-ref']")
+    const BookingsButton = page.getByRole('button', {name:'View My Bookings'})
+    const bookingList = page.locator("[id='booking-card'] span[class*='booking-ref']")
+
+    await increaseButton.click()
+    await fullName.fill("Venkatesh")
+    await emailOnForm.fill("venkates@gm.co")
+    await phoneNumber.fill("8787909878")
+    await confirmButton.click()
+    const refreceNum = await referNumber.textContent()
+    console.log(refreceNum)
+    await BookingsButton.click()
+    await expect(bookingList.last()).toBeVisible()
+    const bookingCount = await bookingList.count()
+    for(let i=0;i<bookingCount;i++)
+    {
+        let allbookiRefs = await bookingList.nth(i).innerText()
+        console.log(allbookiRefs)
+
+    }
+
+
+     //[id="booking-card"] span[class*='booking-ref']
+
+
+})
 
