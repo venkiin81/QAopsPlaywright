@@ -235,6 +235,17 @@ test('Auto_suggestion', async ({page})=>{
 
 test("Auto_suggestion_2",async ({page})=>{
 
+    //test.slow() tripples the default timeout 
+
+    //testlevel test timeout for overall time 
+    test.setTimeout(60000)
+
+    //timeout for action testlevel
+    page.setDefaultTimeout(9000)
+
+    //timeout customisation test level assertion
+    const slowExpect = expect.configure({timeout:10000})
+
     await page.goto("https://www.booking.com/index.en-gb.html?label=en-in-booking-mobile-PzCtZSeq_K7p82LvC_GUtQSM652796016639%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-334108349%3Alp9062055%3Ali%3Adem%3Adm&gclid=CjwKCAjwgJHXBhBGEiwAHohJqx60F0tvZb6PHVqKgJCvRLTqjUlWXLy0qjKaPU1Zmyq4BGl19MQpXBoCxMkQAvD_BwE&aid=2311236&ws=&gad_source=1&gad_campaignid=19655505510&gbraid=0AAAAAD_Ls1Jg_K5CXfMNNQ8Z-mbpTms_T")
 
     const EnterDestination = page.locator("[placeholder='Where are you going?']")
@@ -243,11 +254,13 @@ test("Auto_suggestion_2",async ({page})=>{
     
     const popup = page.getByRole('button', { name: 'Dismiss sign in information.' })
 
-    await expect(popup).toBeVisible()
-    await popup.click()
+    await slowExpect(popup).toBeVisible()
+
+    //step level action timeout 
+    await popup.click({timeout:15000})
 
     await EnterDestination.pressSequentially("Thailand",{delay:100})
-    await expect(suggestionBox).toBeVisible()
+    await slowExpect(suggestionBox).toBeVisible()
     const count=await suggestions.count()
     console.log("Suggestions count: "+count)
     await expect(suggestions.last()).toBeVisible()
@@ -260,7 +273,8 @@ test("Auto_suggestion_2",async ({page})=>{
 
 })
 
-test.only("Searchforref_Id_Complete_booking", async ({browser})=>{
+test("Searchforref_Id_Complete_booking", async ({browser})=>{
+
 
     const context = await browser.newContext()
     const page = await context.newPage()
@@ -277,7 +291,8 @@ test.only("Searchforref_Id_Complete_booking", async ({browser})=>{
     await submitButton.click()
     await expect(logout).toBeVisible()
     await Events.click()
-    await expect(listOfEvents.last()).toBeVisible()
+    //timeout customisation step level 
+    await expect(listOfEvents.last()).toBeVisible({timeout: 10_000})
     const count = await listOfEvents.count()
 
     for(let i=0;i<count;i++)
@@ -321,9 +336,25 @@ test.only("Searchforref_Id_Complete_booking", async ({browser})=>{
 
     }
 
+})
 
-     //[id="booking-card"] span[class*='booking-ref']
+test.only("alerts&frames", async ({page})=>{
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/")
+    await page.locator("#confirmbtn").click()
+    page.on("dialog", dialog=>dialog.accept())
+
+    //to hover mouse 
+    await page.locator("#mousehover").hover()
+
+    const framePage = page.frameLocator("#courses-iframe")
+    //visible locator
+    await framePage.locator("[href*='learning-path']:visible").click()
+    console.log(await framePage.locator("div[class='container'] div[class='text']").textContent())
+
 
 
 })
+
+
 
