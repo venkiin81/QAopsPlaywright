@@ -352,8 +352,6 @@ test.only("alerts&frames", async ({page})=>{
     await framePage.locator("[href*='learning-path']:visible").click()
     console.log(await framePage.locator("div[class='container'] div[class='text']").textContent())
 
-
-
 })
 
 
