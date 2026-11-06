@@ -57,7 +57,7 @@ test('Network_interption', async ({browser})=>{
 
 })
 
-test.only("networkInterption_continue", async({page})=>{
+test("networkInterption_continue", async({page})=>{
 
     await page.addInitScript(value=>{
          window.localStorage.setItem('eventhub_token',value)
@@ -74,5 +74,22 @@ test.only("networkInterption_continue", async({page})=>{
     await page.pause()
 
 
+
+})
+
+test.only("Blocking_an_call", async ({browser})=>{
+
+    const context = await browser.newContext()
+    const page = await context.newPage()
+    //blocking the api call with .css/.jpg 
+    page.route("**/*{.css,.jpg}",route=> route.abort())
+    // printing the request call and resposes 
+    page.on("request",request=>console.log(request.url))
+    page.on("response",response=>console.log(response.url()))
+    await page.goto("https://eventhub.rahulshettyacademy.com/login")
+    await page.pause()
+    await page.locator("#email").fill("Venkatesh@gm.co")
+    await page.locator("#password").fill("Pass@123")
+    await page.locator("#login-btn").click()
 
 })

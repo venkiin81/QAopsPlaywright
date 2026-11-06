@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test')
+const {customTest} =require('../utils/fixture.js')
 
 test("Login", async ({ browser }) => {
 
@@ -11,6 +12,17 @@ test("Login", async ({ browser }) => {
     await page.locator("[type='submit']").click()
     await expect(page.locator("#logout-btn")).toBeVisible()
     await expect(page).toHaveTitle("EventHub — Discover & Book Events")
+
+})
+
+
+//using custom fixtures 
+customTest.only("Flows_using_custom_fixture",async ({Loggedin_Page,CreateOrder})=>{
+    await Loggedin_Page.goto("https://eventhub.rahulshettyacademy.com/")
+    await expect(Loggedin_Page.locator("#logout-btn")).toBeVisible()
+    await expect(Loggedin_Page).toHaveTitle("EventHub — Discover & Book Events")
+    await Loggedin_Page.locator("[data-testid='nav-bookings']").click()
+    await expect(Loggedin_Page.getByText(CreateOrder.bookingRefnum)).toBeVisible()
 
 })
 
@@ -338,7 +350,7 @@ test("Searchforref_Id_Complete_booking", async ({browser})=>{
 
 })
 
-test.only("alerts&frames", async ({page})=>{
+test("alerts&frames", async ({page})=>{
 
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/")
     await page.locator("#confirmbtn").click()

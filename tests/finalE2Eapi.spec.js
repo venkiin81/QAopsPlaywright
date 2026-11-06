@@ -1,7 +1,7 @@
 const{test,expect,request} = require('@playwright/test')
 const LoginPayload = {email: "Venkatesh@gm.co", password: "Pass@123"}
 const bookingPayload={customerName: "Venkate", customerEmail: "v28866@gm.co", customerPhone: "8999897878", quantity: 1,eventId: 285}
-const{ApiUtils}=require('./utils/ApiUtils')
+const{ApiUtils}=require('../utils/ApiUtils')
 
 let response;
 
