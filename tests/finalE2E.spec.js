@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test')
 const {customTest} =require('../utils/fixture.js')
 
+
 test("Login", async ({ browser }) => {
 
     const context = await browser.newContext()
@@ -16,13 +17,15 @@ test("Login", async ({ browser }) => {
 })
 
 
-//using custom fixtures 
-customTest.only("Flows_using_custom_fixture",async ({Loggedin_Page,CreateOrder})=>{
+//using custom 
+// fixtures 
+customTest("Flows_using_custom_fixture",async ({Loggedin_Page,CreateOrder,TestDataForORder})=>{
     await Loggedin_Page.goto("https://eventhub.rahulshettyacademy.com/")
     await expect(Loggedin_Page.locator("#logout-btn")).toBeVisible()
     await expect(Loggedin_Page).toHaveTitle("EventHub — Discover & Book Events")
     await Loggedin_Page.locator("[data-testid='nav-bookings']").click()
     await expect(Loggedin_Page.getByText(CreateOrder.bookingRefnum)).toBeVisible()
+    console.log(TestDataForORder.DataName)
 
 })
 
@@ -363,6 +366,23 @@ test("alerts&frames", async ({page})=>{
     //visible locator
     await framePage.locator("[href*='learning-path']:visible").click()
     console.log(await framePage.locator("div[class='container'] div[class='text']").textContent())
+
+})
+
+test("Taking_screenshot", async ({page})=>{
+
+    await page.goto("https://rahulshettyacademy.com/")
+    //to take screenshot of the page
+    await page.screenshot({path:"screenshots_vis/Visbefore.png"})
+    //to take screenshot of an loactor 
+    await page.locator("div[class*='max-w'] [class*='bg-card']").first().screenshot({path:"screenshots_vis/element.png"})
+    //visual testing 
+})
+
+test("Visual_testing", async ({page})=>{
+
+    await page.goto("https://rahulshettyacademy.com/")
+    expect(await page.screenshot()).toMatchSnapshot("landing.png")
 
 })
 

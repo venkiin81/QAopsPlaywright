@@ -15,14 +15,21 @@ exports.customTest = base.test.extend({
     await page.locator("#password").fill("Pass@123")
     await page.locator("[type='submit']").click()
     await use(page)
+    //testrdaown => Closing of the comtext after all 
+    await context.close()
     },
     CreateOrder: async ({},use)=>{
 
     const apiContext = await request.newContext()
     const apiutils = new ApiUtils(apiContext, LoginPayload)
-    response = await apiutils.createBooking(bookingPayload)
-    use(response)
+    const response = await apiutils.createBooking(bookingPayload)
+    await use(response)
+    //tear down for api => Closing of the comtext after all
+    await apiContext.dispose()
 
+    },
+    TestDataForORder: {
+        DataName: "Venki"
     }
 
 }
