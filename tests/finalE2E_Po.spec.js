@@ -6,7 +6,25 @@ const paradata = JSON.parse(JSON.stringify(require('../utils/finalE2E_poParametr
 //from custom fixture
 const {customdatatest} =require('../utils/fixData.js')
 
-test('Fule2e_Po', async ({page})=>{
+//to make the each test run paralley 
+//test.describe.configure({mode:"parallel"})
+//to make the test series and if one fail it skips next etsts 
+//test.describe.configure({mode:"serial"})
+
+//taging test using grep @web 
+//command npx playwright test tests/finalE2E_Po.spec.js --grep "@web"
+// to find list of test tagged 
+//npx playwright test tests/finalE2E_Po.spec.js --grep "@web" --list
+
+/**
+ * describe or wrap the tests to run in parallel and series 
+ * test.describe('name'()={
+ * test.describe.configure({mode:parallel/series})
+ * test('test1'async({page})=>{----})
+ * test('test1'async({page})=>{----})
+ * })
+ */
+test(`@web Fule2e_Po`, async ({page})=>{
 
 
     const poManager = new PoManager(page)
@@ -21,7 +39,7 @@ test('Fule2e_Po', async ({page})=>{
 
 for(const data of paradata)
 {    
-test(`valid and invalid cred: ${data.email}`, async ({page})=>{
+test(`@web valid and invalid cred: ${data.email}`, async ({page})=>{
 
     const poManager = new PoManager(page)
     const loginPage = poManager.getLogin()
@@ -33,7 +51,7 @@ test(`valid and invalid cred: ${data.email}`, async ({page})=>{
 })
 }
 
-customdatatest.only('login_using_fix_data',async ({page,datasets})=>{
+customdatatest('login_using_fix_data',async ({page,datasets})=>{
 
     const poManager = new PoManager(page)
     const loginPage = poManager.getLogin()
@@ -41,6 +59,5 @@ customdatatest.only('login_using_fix_data',async ({page,datasets})=>{
     await loginPage.goto()
     await loginPage.LoginUser(datasets.email,datasets.password)
     await expect(loginPage.logout).toBeVisible()
-
 
 })
