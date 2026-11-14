@@ -2,14 +2,23 @@
   "name": "playwrightautomation",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "allure:generate": "allure generate ./allure-results --clean",
+    "allure:open": "allure open ./allure-report",
+    "web": "npx playwright test ./tests/finalE2E_Po.spec.js --grep @web",
+    "config1": "npx playwright test ./tests/finalE2E_Po.spec.js --grep @web --config plawright.config1.js",
+    "allure:report":"npx plawright test ./tests/finalE2E_Po.spec.js --reporter=line,allure-playwright",
+    "normal":"npx playwright test tests/finalE2E_Po.spec.js --grep @normal"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
-    "@types/node": "^26.1.0"
+    "@types/node": "^26.1.0",
+    "allure-commandline": "^2.46.1",
+    "allure-playwright": "^3.14.0"
   },
   "dependencies": {
     "exceljs": "^4.4.0"

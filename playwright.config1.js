@@ -10,6 +10,7 @@ export default defineConfig({
   },
   //timeout for whole test 
   timeout : 20*1000,
+  //global setting to run tests in parallel 
   fullyParallel: true,
   //retry property 
   retries: 1,

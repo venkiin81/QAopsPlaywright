@@ -24,7 +24,26 @@ const {customdatatest} =require('../utils/fixData.js')
  * test('test1'async({page})=>{----})
  * })
  */
-test(`@web Fule2e_Po`, async ({page})=>{
+
+/**allure report 
+ * npm install -D allure-playwright        
+ * npx playwright test tests/finalE2E_Po.spec.js --reporter=line,allure-playwright
+ * npx allure generate ./allure-results --clean  
+ * npx allure open ./allure-report 
+ */
+
+/**jenkins code 
+ * download jenkins was
+ * java -jar jenkins.war -httpPort=9090
+ * pwd: eda2d6927197435aadf93b50f9a0ecc6
+ * http://localhost:8080/
+ * username : VenkateshPrasad
+ * Password: Jenk@2029@
+ * path : C:\Users\Venkatesh Prasad\Desktop\PlayWrightAutomation\tests\finalE2E_Po.spec.js
+ * "C:\Users\Venkatesh Prasad\Desktop\PlayWrightAutomation"
+ */
+
+test(`@web, @normal Fule2e_Po`, async ({page})=>{
 
 
     const poManager = new PoManager(page)
@@ -51,7 +70,7 @@ test(`@web valid and invalid cred: ${data.email}`, async ({page})=>{
 })
 }
 
-customdatatest('login_using_fix_data',async ({page,datasets})=>{
+customdatatest('@normal login_using_fix_data',async ({page,datasets})=>{
 
     const poManager = new PoManager(page)
     const loginPage = poManager.getLogin()

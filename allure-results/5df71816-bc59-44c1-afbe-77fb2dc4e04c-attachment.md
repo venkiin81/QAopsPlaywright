@@ -1,0 +1,169 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: finalE2E_Po.spec.js >> @web Fule2e_Po
+- Location: tests\finalE2E_Po.spec.js:27:1
+
+# Error details
+
+```
+Test timeout of 20000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "EventHub" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e10]:
+        - link "Home" [ref=e11] [cursor=pointer]:
+          - /url: /
+        - link "Events" [ref=e12] [cursor=pointer]:
+          - /url: /events
+        - link "My Bookings" [ref=e13] [cursor=pointer]:
+          - /url: /bookings
+        - link "API Docs" [ref=e14] [cursor=pointer]:
+          - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+        - button "Admin" [ref=e16] [cursor=pointer]
+        - generic [ref=e19]:
+          - generic "Venkatesh@gm.co" [ref=e20]
+          - button "Logout" [ref=e21] [cursor=pointer]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - navigation [ref=e24]:
+        - link "Events" [ref=e25] [cursor=pointer]:
+          - /url: /events
+        - generic [ref=e26]: /
+        - generic [ref=e27]: Hollywood Monsoon Night — Los Angeles
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - img "Hollywood Monsoon Night — Los Angeles" [ref=e31]
+          - generic [ref=e32]:
+            - generic [ref=e33]:
+              - generic [ref=e34]: Concert
+              - generic [ref=e35]: Featured
+            - heading "Hollywood Monsoon Night — Los Angeles" [level=1] [ref=e36]
+            - generic [ref=e37]: This is a featured event — always available for practice
+            - generic [ref=e40]:
+              - generic [ref=e41]:
+                - generic [ref=e42]: 📅
+                - generic [ref=e43]:
+                  - paragraph [ref=e44]: Date
+                  - paragraph [ref=e45]: Sunday, 12 July
+              - generic [ref=e46]:
+                - generic [ref=e47]: 🕐
+                - generic [ref=e48]:
+                  - paragraph [ref=e49]: Time
+                  - paragraph [ref=e50]: 12:30 am
+              - generic [ref=e51]:
+                - generic [ref=e52]: 📍
+                - generic [ref=e53]:
+                  - paragraph [ref=e54]: Venue
+                  - paragraph [ref=e55]: Dome, NSCI SVP Stadium, Worli
+              - generic [ref=e56]:
+                - generic [ref=e57]: 🌆
+                - generic [ref=e58]:
+                  - paragraph [ref=e59]: City
+                  - paragraph [ref=e60]: Los Angeles
+              - generic [ref=e61]:
+                - generic [ref=e62]: 🎫
+                - generic [ref=e63]:
+                  - paragraph [ref=e64]: Available
+                  - paragraph [ref=e65]: 2218 / 3000 seats
+              - generic [ref=e66]:
+                - generic [ref=e67]: 💰
+                - generic [ref=e68]:
+                  - paragraph [ref=e69]: Price per ticket
+                  - paragraph [ref=e70]: $2,500
+            - generic [ref=e71]:
+              - heading "About this event" [level=2] [ref=e72]
+              - paragraph [ref=e73]: An unforgettable evening of live music performed by A-list playback singers under the open Mumbai sky. Featuring chart-toppers from the last three decades with a stunning light show and pyrotechnics.
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - heading "Book Tickets" [level=2] [ref=e77]
+            - generic [ref=e78]: $2,500
+          - paragraph [ref=e79]: per ticket
+          - generic [ref=e80]:
+            - heading "Booking Confirmed! 🎉" [level=3] [ref=e84]
+            - paragraph [ref=e85]: Your tickets are reserved.
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - generic [ref=e88]: Booking Ref
+                - generic [ref=e89]: H-UIGJ7J
+              - generic [ref=e90]:
+                - generic [ref=e91]: Customer
+                - generic [ref=e92]: Venkatesh
+              - generic [ref=e93]:
+                - generic [ref=e94]: Tickets
+                - generic [ref=e95]: "2"
+              - generic [ref=e96]:
+                - generic [ref=e97]: Total
+                - generic [ref=e98]: $5,000
+            - generic [ref=e99]:
+              - link [ref=e100] [cursor=pointer]:
+                - /url: /bookings
+                - button "View My Bookings" [ref=e101]
+              - link [ref=e102] [cursor=pointer]:
+                - /url: /events
+                - button "Browse More Events" [ref=e103]
+  - contentinfo [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - heading "Rahul Shetty Academy" [level=3] [ref=e108]
+          - paragraph [ref=e109]: India's leading QA automation training academy — empowering engineers to build real-world testing skills.
+        - generic [ref=e110]:
+          - heading "Popular Courses" [level=3] [ref=e111]
+          - list [ref=e112]:
+            - listitem [ref=e113]:
+              - link "Selenium WebDriver with Java" [ref=e114] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e115]:
+              - link "Playwright with JavaScript" [ref=e116] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e117]:
+              - link "RestAssured API Testing" [ref=e118] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e119]:
+              - link "Cypress End-to-End Testing" [ref=e120] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e121]:
+              - link "Appium Mobile Testing" [ref=e122] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+        - generic [ref=e123]:
+          - heading "QA Job Hiring Platform" [level=3] [ref=e124]
+          - paragraph [ref=e125]: Get hired faster — take skill assessments trusted by top QA employers worldwide.
+          - link "techsmarthire.com →" [ref=e126] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+        - generic [ref=e127]:
+          - heading "EventHub Practice App" [level=3] [ref=e128]
+          - list [ref=e129]:
+            - listitem [ref=e130]:
+              - link "Browse Events" [ref=e131] [cursor=pointer]:
+                - /url: /events
+            - listitem [ref=e132]:
+              - link "My Bookings" [ref=e133] [cursor=pointer]:
+                - /url: /bookings
+            - listitem [ref=e134]:
+              - link "Manage Events" [ref=e135] [cursor=pointer]:
+                - /url: /admin/events
+            - listitem [ref=e136]:
+              - link "API Documentation" [ref=e137] [cursor=pointer]:
+                - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+      - generic [ref=e138]:
+        - paragraph [ref=e139]: © 2026 Rahul Shetty Academy. All rights reserved.
+        - generic [ref=e140]:
+          - link "rahulshettyacademy.com →" [ref=e141] [cursor=pointer]:
+            - /url: https://rahulshettyacademy.com
+          - link "techsmarthire.com →" [ref=e142] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+  - alert [ref=e143]
+```
