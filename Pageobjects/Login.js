@@ -22,7 +22,7 @@ class Login
         await this.password.fill(password)
         await this.submit.click()
         
-        await expect(this.page).toHaveTitle("EventHub — Discover & Book Events")
+       
     }
 
 

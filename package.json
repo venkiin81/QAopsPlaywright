@@ -7,8 +7,8 @@
     "allure:open": "allure open ./allure-report",
     "web": "npx playwright test ./tests/finalE2E_Po.spec.js --grep @web",
     "config1": "npx playwright test ./tests/finalE2E_Po.spec.js --grep @web --config plawright.config1.js",
-    "allure:report":"npx plawright test ./tests/finalE2E_Po.spec.js --reporter=line,allure-playwright",
-    "normal":"npx playwright test tests/finalE2E_Po.spec.js --grep @normal"
+    "allure:report": "npx plawright test ./tests/finalE2E_Po.spec.js --reporter=line,allure-playwright",
+    "normal": "npx playwright test tests/finalE2E_Po.spec.js --grep @normal"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "allure-playwright": "^3.14.0"
   },
   "dependencies": {
+    "@cucumber/cucumber": "^13.3.0",
     "exceljs": "^4.4.0"
   }
 }
