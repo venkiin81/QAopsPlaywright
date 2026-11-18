@@ -8,7 +8,9 @@
     "web": "npx playwright test ./tests/finalE2E_Po.spec.js --grep @web",
     "config1": "npx playwright test ./tests/finalE2E_Po.spec.js --grep @web --config plawright.config1.js",
     "allure:report": "npx plawright test ./tests/finalE2E_Po.spec.js --reporter=line,allure-playwright",
-    "normal": "npx playwright test tests/finalE2E_Po.spec.js --grep @normal"
+    "normal": "npx playwright test tests/finalE2E_Po.spec.js --grep @normal",
+    "cucumber_report": "npx cucumber-js features/InvlidLogin.feature --exit --format html:cucumber-report.html",
+    "cucumber_parallel":"npx cucumber-js features/InvlidLogin.feature --parallel 2 --exit"
   },
   "keywords": [],
   "author": "",

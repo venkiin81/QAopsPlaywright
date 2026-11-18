@@ -1,3 +1,7 @@
+// to run a particular feature file based on name >npx cucumber-js features/InvlidLogin.feature
+//to run all based on tags 
+
+@vaidCreds
 Feature: Login to Eventhub
 
   Scenario: Login with valid credentials 

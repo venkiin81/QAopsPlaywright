@@ -6,11 +6,11 @@ const {chromium,expect} = require('@playwright/test')
 
 Given('login to Eventhub with {string} and {string}',{timeout:10000}, async function (username, password) {
 
-    const browser = await chromium.launch({ headless: false })
-    const context = await browser.newContext()
-    this.page = await context.newPage()
-    const poManager = new PoManager(this.page)
-    const loginPage = poManager.getLogin()
+    // const browser = await chromium.launch({ headless: false })
+    // const context = await browser.newContext()
+    // this.page = await context.newPage()
+    // const poManager = new PoManager(this.page)
+    const loginPage = this.poManager.getLogin()
     //const eventspage = poManager.getEvents()
 
     await loginPage.goto()
@@ -31,6 +31,13 @@ Then('check is the logged in user is of {string}',async function (usermail) {
     {
         console.log("logged in correctly")
     }
-    await this.page.close()
+    //await this.page.close()
+});
+
+Then('Check if validation is shown on login page', async function () {
+
+    await expect(this.page.locator("body > div:nth-child(2)")).toBeVisible()
+    const errormessage = await this.page.locator("body > div:nth-child(2)").textContent()
+    console.log(errormessage)
 });
 

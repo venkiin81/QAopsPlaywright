@@ -1,0 +1,17 @@
+run code in parallel 
+npx.cmd cucumber-js features/InvlidLogin.feature --parallel 2 --exit
+
+run code using tags 
+npx.cmd cucumber-js features/InvlidLogin.feature --tags "@InvalidCreds" --exit
+
+run specific feature file
+npx.cmd cucumber-js features/InvlidLogin.feature
+
+report genration for a runned case
+npx cucumber-js features/InvlidLogin.feature --exit --format html:cucumber-report.html
+
+rerun of failed cases 
+npx cucumber-js features/InvlidLogin.feature --retry 1 --exit 
+
+run from package.json scripts 
+npm run cucumber_parallel
